@@ -186,9 +186,6 @@ input::-webkit-inner-spin-button {
     align-items: center;
     justify-content: center;
     border: none;
-    -moz-box-shadow: 0 0 3px #00000099;
-    -webkit-box-shadow: 0 0 3px #00000099;
-    box-shadow: 0 0 3px #00000099;
     background-color: rgba(125, 125, 125, 0.379);
     border-radius: 1rem;
     padding: 1rem;

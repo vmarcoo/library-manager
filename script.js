@@ -215,9 +215,11 @@ cardReadBtn.forEach((button, index) => {
 const cardRemoveBtn = document.querySelectorAll("#cardRemove")
 cardRemoveBtn.forEach((button, index) => {
   button.addEventListener("click", () => {
-    for (let [num, book] of myLibrary.entries()){
-      if (num == index){
-        myLibrary.pop(book) // ARRUMAR ESSA PORRA
+    for (let book in myLibrary){
+      if (index == book){
+        myLibrary.splice(book, 1) // ARRUMAR ESSA PORRA
+        localStorage.clear()
+        localStorage.setItem("Books", JSON.stringify(myLibrary))
       }
     }
   })
