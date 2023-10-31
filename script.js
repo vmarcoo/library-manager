@@ -155,7 +155,7 @@ function createCards() {
       </div>`
 
       cardsSection.append(card)
-
+      
       const cardReadBtn = document.querySelectorAll("#cardRead")
       cardReadBtn.forEach((button) => {
 
@@ -220,6 +220,7 @@ cardRemoveBtn.forEach((button, index) => {
         myLibrary.splice(book, 1) // ARRUMAR ESSA PORRA
         localStorage.clear()
         localStorage.setItem("Books", JSON.stringify(myLibrary))
+        return location.reload()
       }
     }
   })
