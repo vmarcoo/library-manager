@@ -217,7 +217,7 @@ cardRemoveBtn.forEach((button, index) => {
   button.addEventListener("click", () => {
     for (let book in myLibrary){
       if (index == book){
-        myLibrary.splice(book, 1) // ARRUMAR ESSA PORRA
+        myLibrary.splice(book, 1)
         localStorage.clear()
         localStorage.setItem("Books", JSON.stringify(myLibrary))
         return location.reload()
