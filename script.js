@@ -1,5 +1,4 @@
 const myLibrary = []
-const myCovers = []
 
 if (localStorage.length !== 0){
   let locallyStoredBooks = localStorage.getItem("Books")
@@ -8,12 +7,11 @@ if (localStorage.length !== 0){
 }
 
 class Book {
-    constructor(title, author, pages, read, cover) {
+    constructor(title, author, pages, read) {
         this.title = title;
         this.author = author;
         this.pages = pages;
         this.read = read;
-        this.cover = cover;
     }
 }
 
@@ -144,14 +142,6 @@ function createCards() {
 
     else {
       card.innerHTML = `
-      <div id="imageFrame">
-        <img id="cover-img" alt="">
-
-        <div id="addImgBtn">
-          <label for="cover-img-input">Change cover</label>
-          <input type="file" id="cover-img-input" class="_${(book.title).replace(/[:.-\s]/g, "").toLowerCase()}" name="img" accept="image/*">
-        </div>  
-      </div>
 
       <div id="cardParagraphs">
         <p id="cardTitle">${book.title}</p>
@@ -161,38 +151,74 @@ function createCards() {
         
       <div id="cardButtons">
         <button id="cardRead">${bookWasRead}</button>
-        <button id="cardEdit">Edit</button>
         <button id="cardRemove">Remove</button>
       </div>`
 
       cardsSection.append(card)
+
       const cardReadBtn = document.querySelectorAll("#cardRead")
       cardReadBtn.forEach((button) => {
-        if (button.textContent === "Read") {button.classList.add("readBtnBg")}
-        else {button.classList.add("notReadBtnBg")}
+
+        if (button.textContent === "Read"){
+          button.className = ""
+          button.classList.add("readBtnBg")
+        }
+
+        else {
+          button.className = ""
+          button.classList.add("notReadBtnBg")
+        }
       })
     }
   })
 }
 
-const coverInput = document.querySelectorAll("#cover-img-input")
-coverInput.forEach((input) => {
-  input.addEventListener("change", () => {
-    const reader = new FileReader();
-    reader.readAsDataURL(input.files[0]);
-    
-    reader.addEventListener("load", () => {
-      myLibrary.forEach((book) => {
-        if(`_${book.title.replace(/[:.-\s]/g, "").toLowerCase()}` == input.classList){
+const cardReadBtn = document.querySelectorAll("#cardRead")
+cardReadBtn.forEach((button, index) => {
 
+  if (button.textContent === "Read"){
+    button.className = ""
+    button.classList.add("readBtnBg")
+  }
+
+  else {
+    button.className = ""
+    button.classList.add("notReadBtnBg")
+  }
+
+  button.addEventListener("click", () => {
+    for (let [num, book] of myLibrary.entries()){
+      if (num == index){
+
+        if (button.textContent === "Read"){
+          button.textContent = "Not read"
+          button.className = ""
+          button.classList.add("notReadBtnBg")
+          book.read = false
+          localStorage.clear()
+          localStorage.setItem("Books", JSON.stringify(myLibrary))
         }
-
         
-      })
-    });
+        else {
+          button.textContent = "Read"
+          button.className = ""
+          button.classList.add("readBtnBg")
+          book.read = true
+          localStorage.clear()
+          localStorage.setItem("Books", JSON.stringify(myLibrary))
+        }
+      }
+    }
+  })
+})
 
-    const newCover = document.querySelector("#cover-img");
-  
-    newCover.src = localStorage.getItem("cover");
-  });  
+const cardRemoveBtn = document.querySelectorAll("#cardRemove")
+cardRemoveBtn.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    for (let [num, book] of myLibrary.entries()){
+      if (num == index){
+        myLibrary.pop(book) // ARRUMAR ESSA PORRA
+      }
+    }
+  })
 })

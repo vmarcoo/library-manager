@@ -198,38 +198,6 @@ input::-webkit-inner-spin-button {
     white-space: nowrap;
 }
 
-#imageFrame {
-    display: flex;
-    border: 1px solid rgb(126, 126, 126);
-    height: 8rem;
-    width: 11rem;
-}
-
-#imageFrame img {
-    min-height: 100%;
-    min-width: 100%;
-}
-
-#addImgBtn input {
-    display: none;
-}
-
-#addImgBtn {
-    justify-self: flex-end;
-    align-self: flex-end;
-}
-
-#addImgBtn label {
-    position: relative;
-    right: 3.9rem;
-    font-size: .6rem;
-}
-
-#addImgBtn label:hover {
-    cursor: pointer;
-    color: #00000052;
-}
-
 #cardParagraphs {
     display: flex;
     flex-direction: column;
